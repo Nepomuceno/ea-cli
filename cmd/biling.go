@@ -9,19 +9,19 @@ import (
 )
 
 var (
-	accountCmd = &cobra.Command{
-		Use:   "account",
-		Short: "Manage EA accounts",
+	billingCmd = &cobra.Command{
+		Use:   "billing",
+		Short: "Manage EA billing",
 	}
-	accountListCmd = &cobra.Command{
+	billingListCmd = &cobra.Command{
 		Use: "list",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			acClient, err := getEnrollmentAccountClient(cmd)
+			acClient, err := getAccountClient(cmd)
 			if err != nil {
 				return err
 			}
 			acPager := acClient.NewListPager(nil)
-			result := make([]*armbilling.EnrollmentAccountSummary, 0)
+			result := make([]*armbilling.Account, 0)
 			for acPager.More() {
 				page, err := acPager.NextPage(context.Background())
 				if err != nil {
@@ -36,7 +36,7 @@ var (
 	}
 )
 
-func initAccount(rootCmd *cobra.Command) {
-	accountCmd.AddCommand(accountListCmd)
-	rootCmd.AddCommand(accountCmd)
+func initBilling(rootCmd *cobra.Command) {
+	billingCmd.AddCommand(billingListCmd)
+	rootCmd.AddCommand(billingCmd)
 }

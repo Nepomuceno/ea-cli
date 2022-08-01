@@ -22,5 +22,9 @@ func init() {
 	rootCmd.PersistentFlags().StringP("username", "u", "", "Username to authenticate")
 	rootCmd.PersistentFlags().StringP("password", "p", "", "Password to authenticate")
 	rootCmd.PersistentFlags().String("login-tenant", "", "Tenant ID to authenticate")
+	rootCmd.MarkFlagsRequiredTogether("username", "password", "login-tenant")
 	initAccount(rootCmd)
+	initRole(rootCmd)
+	initBilling(rootCmd)
+	initSubscription(rootCmd)
 }

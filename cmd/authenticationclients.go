@@ -43,17 +43,39 @@ func getAliasClient(cmd *cobra.Command) (*armsubscription.AliasClient, error) {
 	client, err := armsubscription.NewAliasClient(cred, nil)
 	return client, err
 }
+
+func getSubscriptionClient(cmd *cobra.Command) (*armsubscription.Client, error) {
+	cred, err := getCredentials(cmd)
+	if err != nil {
+		return nil, err
+	}
+	client, err := armsubscription.NewClient(cred, nil)
+	return client, err
+}
+
 func getCredentials(cmd *cobra.Command) (azcore.TokenCredential, error) {
 	useServicePrincipal, err := cmd.Flags().GetBool("service-principal")
 	if err != nil {
 		return nil, err
 	}
 	if useServicePrincipal {
+		clientID, err := cmd.Flags().GetString("username")
+		if err != nil {
+			return nil, err
+		}
+		clientSecret, err := cmd.Flags().GetString("password")
+		if err != nil {
+			return nil, err
+		}
 		tenantID, err := cmd.Flags().GetString("login-tenant")
 		if err != nil {
 			return nil, err
 		}
-		azidentity.NewClientSecretCredential(tenantID, "", "", nil)
+		cred, err := azidentity.NewClientSecretCredential(tenantID, clientID, clientSecret, nil)
+		if err != nil {
+			return nil, err
+		}
+		return cred, nil
 	}
 
 	opt := azidentity.DefaultAzureCredentialOptions{
