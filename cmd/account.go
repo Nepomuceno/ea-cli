@@ -97,10 +97,16 @@ func initAccount(rootCmd *cobra.Command) {
 	accountGivePermissionCmd.Flags().String("principal-tenant-id", "t", "Tenant ID to assign the permission to")
 	accountGivePermissionCmd.Flags().String("billing-account-number", "b", "Billing account number to assign the permission to")
 	accountGivePermissionCmd.Flags().String("enrollment-account-number", "e", "Enrollment account number to assign the permission to")
-	accountGivePermissionCmd.MarkFlagRequired("principal-id")
-	accountGivePermissionCmd.MarkFlagRequired("principal-tenant-id")
-	accountGivePermissionCmd.MarkFlagRequired("billing-account-number")
-	accountGivePermissionCmd.MarkFlagRequired("enrollment-account-number")
+
+	err := accountGivePermissionCmd.MarkFlagRequired("principal-id")
+	PanicIfErr(err)
+	err = accountGivePermissionCmd.MarkFlagRequired("principal-tenant-id")
+	PanicIfErr(err)
+	err = accountGivePermissionCmd.MarkFlagRequired("billing-account-number")
+	PanicIfErr(err)
+	err = accountGivePermissionCmd.MarkFlagRequired("enrollment-account-number")
+	PanicIfErr(err)
+
 	accountCmd.AddCommand(accountGivePermissionCmd)
 	rootCmd.AddCommand(accountCmd)
 }
