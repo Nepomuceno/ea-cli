@@ -67,7 +67,7 @@ func getCredentials(cmd *cobra.Command) (azcore.TokenCredential, error) {
 		if err != nil {
 			return nil, err
 		}
-		tenantID, err := cmd.Flags().GetString("login-tenant")
+		tenantID, err := cmd.Flags().GetString("tenant")
 		if err != nil {
 			return nil, err
 		}
@@ -79,7 +79,7 @@ func getCredentials(cmd *cobra.Command) (azcore.TokenCredential, error) {
 	}
 
 	opt := azidentity.DefaultAzureCredentialOptions{
-		TenantID: cmd.Flag("login-tenant").Value.String(),
+		TenantID: cmd.Flag("tenant").Value.String(),
 	}
 	credDefault, err := azidentity.NewDefaultAzureCredential(&opt)
 
