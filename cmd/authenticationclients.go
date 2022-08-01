@@ -44,15 +44,6 @@ func getAliasClient(cmd *cobra.Command) (*armsubscription.AliasClient, error) {
 	return client, err
 }
 
-func getSubscriptionClient(cmd *cobra.Command) (*armsubscription.Client, error) {
-	cred, err := getCredentials(cmd)
-	if err != nil {
-		return nil, err
-	}
-	client, err := armsubscription.NewClient(cred, nil)
-	return client, err
-}
-
 func getCredentials(cmd *cobra.Command) (azcore.TokenCredential, error) {
 	useServicePrincipal, err := cmd.Flags().GetBool("service-principal")
 	if err != nil {

@@ -7,5 +7,8 @@ import "github.com/nepomueno/ea-cli/cmd"
 // Define the function to create a resource group.
 
 func main() {
-	cmd.Execute()
+	err := cmd.Execute()
+	if err != nil {
+		panic(err)
+	}
 }
