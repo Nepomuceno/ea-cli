@@ -13,7 +13,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// Magic string the defines a subscription creator role it is constant for all azure
+// Magic string that defines a subscription creator role it is constant for all azure
 const SUBSCRIPTION_CREATOR string = "cfff8e42-45ec-463a-9ae9-276083fcf6a9"
 
 var (

@@ -49,7 +49,7 @@ ea-cli account give-creator-permission --billing-account-number <billing-account
 ## Contributing
 
 In order to develop you will need to have go 1.18 installed.
-It is recomended that you also have the following tools installed:
+It is recommended that you also have the following tools installed:
 - golangci-lint   - Installation: `go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest`
 - goreleaser - Installation: `go install github.com/goreleaser/goreleaser@latest`
 
