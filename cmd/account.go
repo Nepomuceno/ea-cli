@@ -43,7 +43,8 @@ var (
 		},
 	}
 	accountGivePermissionCmd = &cobra.Command{
-		Use: "give-permission",
+		Use:   "give-creator-permission",
+		Short: "Give the subscription creator role to a service principal",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			azcred, err := getCredentials(cmd)
 			if err != nil {
