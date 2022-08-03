@@ -1,4 +1,10 @@
 project_name: ea-cli
+release:
+  prerelease: auto
+  mode: append
+sboms:
+  - artifacts: archive
+    id: ea-cli
 before:
   hooks:
     - go mod tidy

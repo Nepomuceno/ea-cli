@@ -150,7 +150,7 @@ func initSubscription(rootCmd *cobra.Command) {
 	subscriptionCreateCmd.Flags().StringP("enrollment-account", "e", "", "Enrollment account")
 	err := subscriptionCreateCmd.MarkFlagRequired("name")
 	PanicIfErr(err)
-	err = subscriptionCreateCmd.MarkFlagRequired("tenant-id")
+	err = subscriptionCreateCmd.MarkFlagRequired("sub-tenant")
 	PanicIfErr(err)
 	err = subscriptionCreateCmd.MarkFlagRequired("subscription-owner")
 	PanicIfErr(err)

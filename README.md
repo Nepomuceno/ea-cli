@@ -18,7 +18,7 @@ If you want to get it from source you will need go 1.8 or higher.
 
 ## Usage
 
-To use ea-cli you will need to hava a calid azure user.
+To use ea-cli you will need to hava a valid azure user.
 
 ### Authentication
 
@@ -40,7 +40,7 @@ You can see a list of commands by just typing `ea-cli help`. If you want to see 
 
 ### Give a service principal subscription creation permissions
 
-In order to do that you will need to know your billing account number ( not the GUID but the actual number) and your enrrolment account number ( not the GUID but the account number).
+In order to do that you will need to know your billing account number ( not the GUID but the actual number) and your enrollment account number ( not the GUID but the account number).
 
 ```bash
 ea-cli account give-creator-permission --billing-account-number <billing-account-number> --enrollment-account-number <enrollment-account-number> --principal-id <principal-id> --principal-tenant-id <principal-tenant-id>
