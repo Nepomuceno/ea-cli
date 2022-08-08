@@ -1,6 +1,6 @@
 package main
 
-import "github.com/nepomueno/ea-cli/cmd"
+import "github.com/nepomuceno/ea-cli/cmd"
 
 // Import key modules.
 

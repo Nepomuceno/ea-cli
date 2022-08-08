@@ -1,4 +1,4 @@
-module github.com/nepomueno/ea-cli
+module github.com/nepomuceno/ea-cli
 
 go 1.18
 

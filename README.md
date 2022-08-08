@@ -12,9 +12,9 @@ There are no prereq if you want to use the relase binaries.
 
 If you want to get it from source you will need go 1.8 or higher.
 
-    ```bash
-    go install github.com/nepomuceno/ea-cli
-    ```
+```bash
+go install github.com/nepomuceno/ea-cli
+```
 
 ## Usage
 
