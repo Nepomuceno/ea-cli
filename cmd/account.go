@@ -92,7 +92,7 @@ var (
 		}}
 )
 
-func initAccount(rootCmd *cobra.Command) {
+func init() {
 	accountCmd.AddCommand(accountListCmd)
 	accountGivePermissionCmd.Flags().String("principal-id", "u", "User ID to assign the permission to")
 	accountGivePermissionCmd.Flags().String("principal-tenant-id", "t", "Tenant ID to assign the permission to")
