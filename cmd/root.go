@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"os"
+
 	"github.com/spf13/cobra"
 )
 
@@ -16,6 +18,7 @@ func Execute() error {
 }
 
 func init() {
+	rootCmd.SetOut(os.Stdout)
 	rootCmd.PersistentFlags().Bool("service-principal", false, "Use service principal to authenticate")
 	rootCmd.PersistentFlags().StringP("username", "u", "", "Username to authenticate")
 	rootCmd.PersistentFlags().StringP("password", "p", "", "Password to authenticate")

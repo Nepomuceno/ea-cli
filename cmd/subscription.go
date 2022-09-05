@@ -3,6 +3,7 @@ package cmd
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"net/url"
 	"strings"
@@ -91,6 +92,9 @@ var subscriptionAcceptCmd = &cobra.Command{
 		if err != nil {
 			return err
 		}
+		if managementGroupID != "" {
+			managementGroupID = fmt.Sprintf("/providers/Microsoft.Management/managementGroups/%s", managementGroupID)
+		}
 		subscriptionID, err := cmd.Flags().GetString("subscription")
 		if err != nil {
 			return err
@@ -104,6 +108,7 @@ var subscriptionAcceptCmd = &cobra.Command{
 		urlPath := "https://management.azure.com/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/acceptOwnership?api-version=2021-10-01"
 		urlPath = strings.ReplaceAll(urlPath, "{subscriptionId}", url.PathEscape(subscriptionID))
 		req, err := runtime.NewRequest(context.Background(), http.MethodPost, urlPath)
+		managementGroupID = fmt.Sprintf("/providers/Microsoft.Management/managementGroups/%s", managementGroupID)
 		if err != nil {
 			return err
 		}
@@ -115,6 +120,13 @@ var subscriptionAcceptCmd = &cobra.Command{
 				ManagementGroupID: &managementGroupID,
 			},
 		}
+		// print json body
+		s, err := json.MarshalIndent(body, "", "\t")
+		if err != nil {
+			return err
+		}
+		cmd.Print(string(s), "\n")
+		// send request
 		err = runtime.MarshalAsJSON(req, body)
 		if err != nil {
 			return err
@@ -124,8 +136,14 @@ var subscriptionAcceptCmd = &cobra.Command{
 		if err != nil {
 			return err
 		}
-		s, _ := json.MarshalIndent(response, "", "\t")
-		cmd.Print(string(s), "\n")
+		s, err = json.MarshalIndent(response.Body, "", "\t")
+		if err != nil {
+			return err
+		}
+		cmd.Print(string(s), "\n Create Response \n")
+		if response.StatusCode > 300 {
+			return fmt.Errorf("failed to accept ownership of subscription %s code %d", subscriptionID, response.StatusCode)
+		}
 		cmd.Println("Subscription ownership accepted", response.StatusCode)
 		return nil
 	},
